@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #faf9f6;
+  color: #1d1f22;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+::selection {
+  background: #f5b700;
+  color: #17181a;
+}
+
+.container-content {
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Number-plate style badge, used sparingly as the page's one recurring signature mark */
+.plate-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f5b700;
+  color: #17181a;
+  border: 2px solid #17181a;
+  padding: 0.35rem 0.85rem;
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #f5b700;
+  outline-offset: 2px;
+}
