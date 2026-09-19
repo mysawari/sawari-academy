@@ -1,3 +1,6 @@
+"use client";
+import { useRazorpayPayment } from "@/hooks/useRazorpayPayment";
+
 const takeaways = [
   "Whether this business suits you",
   "How much capital you may need",
@@ -10,6 +13,8 @@ const takeaways = [
 ];
 
 export default function PricingCTA() {
+  const { handlePayment, loading } = useRazorpayPayment();
+
   return (
     <section id="pricing" className="bg-asphalt text-paper">
       <div className="container-content py-20 sm:py-24">
@@ -42,12 +47,13 @@ export default function PricingCTA() {
             <span className="font-body text-sm text-paper/55">
               ~90 minutes + live Q&amp;A
             </span>
-            <a
-              href="#"
-              className="mt-3 w-full bg-plate-yellow px-8 py-3.5 text-center font-display text-lg font-700 tracking-tight text-asphalt transition-transform hover:-translate-y-0.5 hover:bg-white"
+            <button
+              onClick={handlePayment}
+              disabled={loading}
+              className="mt-3 w-full bg-plate-yellow px-8 py-3.5 text-center font-display text-lg font-700 tracking-tight text-asphalt transition-transform hover:-translate-y-0.5 hover:bg-white disabled:opacity-70 disabled:hover:translate-y-0"
             >
-              Reserve my seat
-            </a>
+              {loading ? "Processing..." : "Reserve my seat"}
+            </button>
             <span className="font-body text-xs text-paper/40">
               Kept small so the room stays focused on participants who are
               genuinely interested.
