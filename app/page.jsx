@@ -1,24 +1,24 @@
 import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import QuestionsLedger from "@/components/QuestionsLedger";
-import Curriculum from "@/components/Curriculum";
-import JourneyFlow from "@/components/JourneyFlow";
-import Audience from "@/components/Audience";
-import Host from "@/components/Host";
-import PricingCTA from "@/components/PricingCTA";
 import Footer from "@/components/Footer";
+import AcademyHero from "@/components/academy/AcademyHero";
+import Opportunities from "@/components/academy/Opportunities";
+import WhatWeCover from "@/components/academy/WhatWeCover";
+import Practical from "@/components/academy/Practical";
+import FeaturedProgram from "@/components/academy/FeaturedProgram";
+import LearningStages from "@/components/academy/LearningStages";
+import BuiltFor from "@/components/academy/BuiltFor";
 
 export default function Home() {
   return (
     <main>
       <Header />
-      <Hero />
-      <QuestionsLedger />
-      <Curriculum />
-      <JourneyFlow />
-      <Audience />
-      <Host />
-      <PricingCTA />
+      <AcademyHero />
+      <Opportunities />
+      <WhatWeCover />
+      <Practical />
+      <FeaturedProgram />
+      <LearningStages />
+      <BuiltFor />
       <Footer />
     </main>
   );
