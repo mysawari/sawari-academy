@@ -143,7 +143,12 @@ export async function POST(req) {
       `,
     };
 
-    await transporter.sendMail(mailOptions);
+    try {
+      await transporter.sendMail(mailOptions);
+    } catch (emailError) {
+      console.error("Payment successful but failed to send email:", emailError);
+      return NextResponse.json({ message: "Payment verified successfully, but email sending failed", isOk: true }, { status: 200 });
+    }
 
     return NextResponse.json({ message: "Payment verified and email sent successfully", isOk: true }, { status: 200 });
   } catch (error) {
