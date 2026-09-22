@@ -5,7 +5,27 @@ import nodemailer from 'nodemailer';
 
 export async function POST(req) {
   try {
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = await req.json();
+    const data = await req.json();
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = data;
+
+    // Validate all required fields exist and are non-empty strings
+    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature ||
+        typeof razorpay_order_id !== 'string' ||
+        typeof razorpay_payment_id !== 'string' ||
+        typeof razorpay_signature !== 'string') {
+      return NextResponse.json(
+        { message: "Missing or invalid payment parameters" },
+        { status: 400 }
+      );
+    }
+
+    // Validate Razorpay ID formats to prevent abuse
+    if (!razorpay_order_id.startsWith('order_') || !razorpay_payment_id.startsWith('pay_')) {
+      return NextResponse.json(
+        { message: "Invalid payment parameters" },
+        { status: 400 }
+      );
+    }
 
     const body = razorpay_order_id + "|" + razorpay_payment_id;
     const expectedSignature = crypto
@@ -13,7 +33,12 @@ export async function POST(req) {
       .update(body.toString())
       .digest("hex");
 
-    const isAuthentic = expectedSignature === razorpay_signature;
+    // Use timing-safe comparison to prevent timing attacks
+    const isAuthentic = expectedSignature.length === razorpay_signature.length &&
+      crypto.timingSafeEqual(
+        Buffer.from(expectedSignature, 'hex'),
+        Buffer.from(razorpay_signature, 'hex')
+      );
 
     if (!isAuthentic) {
       return NextResponse.json({ message: "Invalid Signature" }, { status: 400 });
@@ -153,6 +178,6 @@ export async function POST(req) {
     return NextResponse.json({ message: "Payment verified and email sent successfully", isOk: true }, { status: 200 });
   } catch (error) {
     console.error("Error verifying payment or sending email:", error);
-    return NextResponse.json({ message: "Internal Server Error", error: error.message }, { status: 500 });
+    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
   }
 }
