@@ -108,7 +108,7 @@ export async function POST(req) {
       },
     });
 
-    const groupLink = process.env.WHATSAPP_GROUP_LINK || "https://chat.whatsapp.com/default-link";
+    const groupLink = process.env.WHATSAPP_GROUP_LINK;
 
     const mailOptions = {
       from: `"Sawari Academy" <${process.env.SMTP_USER}>`,
