@@ -4,12 +4,6 @@ import { useRazorpayPayment } from "@/hooks/useRazorpayPayment";
 export default function Header() {
   const { handlePayment, loading } = useRazorpayPayment();
 
-  const links = [
-    { label: "Curriculum", href: "#curriculum" },
-    { label: "Who it's for", href: "#audience" },
-    { label: "Your host", href: "#host" },
-    { label: "Pricing", href: "#pricing" },
-  ];
 
   return (
     <header className="sticky top-0 z-50 border-b-2 border-asphalt bg-paper/95 backdrop-blur">
@@ -23,17 +17,6 @@ export default function Header() {
           </span>
         </a>
 
-        <nav className="hidden items-center gap-7 md:flex">
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="font-body text-[0.95rem] font-medium text-ink/70 transition-colors hover:text-ink"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
 
         <button
           onClick={handlePayment}
