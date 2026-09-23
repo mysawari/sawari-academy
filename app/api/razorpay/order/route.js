@@ -58,9 +58,14 @@ export async function POST(req) {
 
     const order = await razorpay.orders.create(options);
 
-    return NextResponse.json(order, { status: 200 });
+    // Only return the fields the client needs — never expose full Razorpay object
+    return NextResponse.json({
+      id: order.id,
+      amount: order.amount,
+      currency: order.currency,
+    }, { status: 200 });
   } catch (error) {
-    console.error("Razorpay order error:", error);
+    console.error("Razorpay order error:", error?.message || "Unknown error");
     return NextResponse.json({ error: "Failed to create order" }, { status: 500 });
   }
 }

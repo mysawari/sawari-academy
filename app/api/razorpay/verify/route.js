@@ -3,8 +3,47 @@ import crypto from 'crypto';
 import Razorpay from 'razorpay';
 import nodemailer from 'nodemailer';
 
+// Rate limiter for verify endpoint
+const rateLimitMap = new Map();
+const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
+const MAX_REQUESTS = 3; // max 3 verify attempts per minute per IP
+
+function isRateLimited(ip) {
+  const now = Date.now();
+  const record = rateLimitMap.get(ip);
+  if (!record || now - record.windowStart > RATE_LIMIT_WINDOW) {
+    rateLimitMap.set(ip, { windowStart: now, count: 1 });
+    return false;
+  }
+  record.count++;
+  if (record.count > MAX_REQUESTS) return true;
+  return false;
+}
+
+// Clean up old entries periodically
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, record] of rateLimitMap) {
+    if (now - record.windowStart > RATE_LIMIT_WINDOW) {
+      rateLimitMap.delete(ip);
+    }
+  }
+}, 5 * 60 * 1000);
+
 export async function POST(req) {
   try {
+    // Rate limit by IP
+    const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+               || req.headers.get('x-real-ip')
+               || 'unknown';
+
+    if (isRateLimited(ip)) {
+      return NextResponse.json(
+        { message: "Too many requests. Please try again later." },
+        { status: 429 }
+      );
+    }
+
     const data = await req.json();
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = data;
 
@@ -96,14 +135,24 @@ export async function POST(req) {
             }
             .header {
               background-color: #1a1a1a;
-              padding: 30px 40px;
+              padding: 40px;
               text-align: center;
+              border-bottom: 4px solid #eab308;
+            }
+            .header-logo {
+              max-width: 180px;
+              height: auto;
+              margin-bottom: 10px;
+              display: block;
+              margin-left: auto;
+              margin-right: auto;
             }
             .header h1 {
               color: #ffffff;
               margin: 0;
               font-size: 28px;
               letter-spacing: -0.5px;
+              font-weight: 800;
             }
             .content {
               padding: 40px;
@@ -143,7 +192,9 @@ export async function POST(req) {
         <body>
           <div class="container">
             <div class="header">
-              <h1>MySawari</h1>
+              <!-- Replace src with your actual logo URL once hosted -->
+              <img src="https://sawariacademy.in/logo.png" alt="SawariAcademy" class="header-logo" onerror="this.style.display='none'" />
+              <h1>SawariAcademy</h1>
             </div>
             <div class="content">
               <h2>Payment Successful! 🎉</h2>
@@ -159,7 +210,7 @@ export async function POST(req) {
               <a href="${groupLink}" style="color: #0284c7;">${groupLink}</a></p>
             </div>
             <div class="footer">
-              <p>See you in the masterclass!<br><strong>Mukhlesur Rahman & The MySawari Team</strong></p>
+              <p>See you in the masterclass!<br><strong>Mukhlesur Rahman</strong></p>
               <p style="margin-top: 15px; font-size: 12px;">If you have any questions, simply reply to this email (hello@sawariacademy.in).</p>
             </div>
           </div>
@@ -171,13 +222,13 @@ export async function POST(req) {
     try {
       await transporter.sendMail(mailOptions);
     } catch (emailError) {
-      console.error("Payment successful but failed to send email:", emailError);
+      console.error("Payment successful but failed to send email:", emailError?.message || "Unknown error");
       return NextResponse.json({ message: "Payment verified successfully, but email sending failed", isOk: true }, { status: 200 });
     }
 
     return NextResponse.json({ message: "Payment verified and email sent successfully", isOk: true }, { status: 200 });
   } catch (error) {
-    console.error("Error verifying payment or sending email:", error);
+    console.error("Error verifying payment or sending email:", error?.message || "Unknown error");
     return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
   }
 }

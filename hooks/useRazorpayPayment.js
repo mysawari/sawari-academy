@@ -75,11 +75,13 @@ export function useRazorpayPayment() {
         theme: {
           color: "#eab308", // match plate-yellow
         },
-        prefill: {
-          name: "",
-          email: "",
-          contact: ""
+        hidden: {
+          contact: false,
+          email: false
         },
+        prefill: {
+          email: "" // adding this back sometimes forces the "Optional" label to disappear
+        }
       };
 
       const paymentObject = new window.Razorpay(options);
