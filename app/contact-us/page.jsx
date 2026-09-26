@@ -32,8 +32,8 @@ export default function ContactUs() {
             <tr>
               <th>Support email</th>
               <td>
-                <a href="mailto:support@mysawari.example.com">
-                  support@mysawari.example.com
+                <a href="mailto:hello@sawariacademy.in">
+                  hello@sawariacademy.in
                 </a>
               </td>
             </tr>

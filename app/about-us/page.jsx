@@ -54,8 +54,8 @@ export default function AboutUs() {
       <p>
         Have a question before enrolling? Visit our{" "}
         <a href="/contact-us">Contact Us</a> page or write to us at{" "}
-        <a href="mailto:support@mysawari.example.com">
-          support@mysawari.example.com
+        <a href="mailto:hello@sawariacademy.in">
+          hello@sawariacademy.in
         </a>
         .
       </p>

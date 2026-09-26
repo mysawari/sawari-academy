@@ -23,8 +23,8 @@ export default function TermsAndConditions() {
         MySawari is operated by [Legal Entity Name], registered at
         [Registered Business Address, City, State, PIN, India]. You can
         reach us at{" "}
-        <a href="mailto:support@mysawari.example.com">
-          support@mysawari.example.com
+        <a href="mailto:hello@sawariacademy.in">
+          hello@sawariacademy.in
         </a>{" "}
         or through our{" "}
         <a href="/contact-us">Contact Us</a> page.
@@ -168,8 +168,8 @@ export default function TermsAndConditions() {
       <h2>13. Contact</h2>
       <p>
         Questions about these Terms can be sent to{" "}
-        <a href="mailto:support@mysawari.example.com">
-          support@mysawari.example.com
+        <a href="mailto:hello@sawariacademy.in">
+          hello@sawariacademy.in
         </a>{" "}
         or via our <a href="/contact-us">Contact Us</a> page.
       </p>

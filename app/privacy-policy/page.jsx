@@ -125,8 +125,8 @@ export default function PrivacyPolicy() {
       </ul>
       <p>
         To exercise any of these rights, contact us at{" "}
-        <a href="mailto:privacy@mysawari.example.com">
-          privacy@mysawari.example.com
+        <a href="mailto:hello@sawariacademy.in">
+          hello@sawariacademy.in
         </a>
         . We will respond within a reasonable timeframe.
       </p>
@@ -148,8 +148,8 @@ export default function PrivacyPolicy() {
       <h2>10. Contact us</h2>
       <p>
         For any privacy-related questions, write to{" "}
-        <a href="mailto:privacy@mysawari.example.com">
-          privacy@mysawari.example.com
+        <a href="mailto:hello@sawariacademy.in">
+          hello@sawariacademy.in
         </a>{" "}
         or use our <a href="/contact-us">Contact Us</a> page.
       </p>

@@ -95,8 +95,8 @@ export default function CookiePolicy() {
       <h2>6. Contact us</h2>
       <p>
         Questions about our use of cookies can be sent to{" "}
-        <a href="mailto:privacy@mysawari.example.com">
-          privacy@mysawari.example.com
+        <a href="mailto:hello@sawariacademy.in">
+          hello@sawariacademy.in
         </a>
         .
       </p>

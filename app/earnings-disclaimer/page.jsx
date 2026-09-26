@@ -81,8 +81,8 @@ export default function EarningsDisclaimer() {
       <h2>6. Questions</h2>
       <p>
         If anything in this disclaimer is unclear, contact us at{" "}
-        <a href="mailto:support@mysawari.example.com">
-          support@mysawari.example.com
+        <a href="mailto:hello@sawariacademy.in">
+          hello@sawariacademy.in
         </a>{" "}
         before purchasing a seat.
       </p>

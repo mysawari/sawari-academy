@@ -81,8 +81,8 @@ export default function RefundPolicy() {
         If you are charged more than once for the same seat, or if a
         payment is deducted from your account but not confirmed by
         Razorpay, contact us with your transaction reference at{" "}
-        <a href="mailto:support@mysawari.example.com">
-          support@mysawari.example.com
+        <a href="mailto:hello@sawariacademy.in">
+          hello@sawariacademy.in
         </a>{" "}
         and we will verify with Razorpay and refund any duplicate or
         unconfirmed charge.
@@ -98,8 +98,8 @@ export default function RefundPolicy() {
       <h2>7. How to request a refund or cancellation</h2>
       <p>
         Email{" "}
-        <a href="mailto:support@mysawari.example.com">
-          support@mysawari.example.com
+        <a href="mailto:hello@sawariacademy.in">
+          hello@sawariacademy.in
         </a>{" "}
         with the subject line &ldquo;Refund request&rdquo;, along with your
         full name, the email used at checkout, and your Razorpay

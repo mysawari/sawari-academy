@@ -15,7 +15,7 @@ export default function ContactForm() {
     const body = encodeURIComponent(
       `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
     );
-    window.location.href = `mailto:support@mysawari.example.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:hello@sawariacademy.in?subject=${subject}&body=${body}`;
   }
 
   return (
