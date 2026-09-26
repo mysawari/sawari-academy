@@ -10,10 +10,10 @@ export default function Header() {
       <div className="container-content flex h-16 items-center justify-between">
         <a href="#top" className="flex items-center gap-2">
           <span className="font-display text-2xl font-800 tracking-tight text-ink">
-            MySawari
+            Sawari
           </span>
           <span className="hidden font-display text-xs font-600 uppercase tracking-plate text-steel sm:inline">
-            Masterclass
+            Academy
           </span>
         </a>
 
