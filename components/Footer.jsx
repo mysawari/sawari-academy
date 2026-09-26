@@ -1,8 +1,12 @@
+"use client";
+
+import { useRazorpayPayment } from "@/hooks/useRazorpayPayment";
+
 const explore = [
   { label: "Curriculum", href: "/#curriculum" },
   { label: "Who it's for", href: "/#audience" },
   { label: "Your host", href: "/#host" },
-  { label: "Reserve a seat — ₹199", href: "/#pricing" },
+  { label: "Reserve a seat — ₹199", isPayment: true },
 ];
 
 const company = [
@@ -20,6 +24,7 @@ const legal = [
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const { handlePayment, loading } = useRazorpayPayment();
 
   return (
     <footer className="bg-paper text-ink">
@@ -55,7 +60,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <FooterColumn title="Explore" links={explore} />
+          <FooterColumn title="Explore" links={explore} onPayment={handlePayment} loading={loading} />
           <FooterColumn title="Company" links={company} />
           <FooterColumn title="Legal" links={legal} />
         </div>
@@ -88,21 +93,31 @@ export default function Footer() {
   );
 }
 
-function FooterColumn({ title, links }) {
+function FooterColumn({ title, links, onPayment, loading }) {
   return (
     <div>
       <span className="font-display text-sm font-700 uppercase tracking-plate text-ink/45">
         {title}
       </span>
       <ul className="mt-4 flex flex-col gap-3">
-        {links.map((link) => (
-          <li key={link.href}>
-            <a
-              href={link.href}
-              className="font-body text-sm text-ink/65 transition-colors hover:text-ink"
-            >
-              {link.label}
-            </a>
+        {links.map((link, i) => (
+          <li key={link.href || i}>
+            {link.isPayment ? (
+              <button
+                onClick={onPayment}
+                disabled={loading}
+                className="font-body text-sm text-ink/65 transition-colors hover:text-ink text-left"
+              >
+                {loading ? "Processing..." : link.label}
+              </button>
+            ) : (
+              <a
+                href={link.href}
+                className="font-body text-sm text-ink/65 transition-colors hover:text-ink"
+              >
+                {link.label}
+              </a>
+            )}
           </li>
         ))}
       </ul>
