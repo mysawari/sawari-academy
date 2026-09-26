@@ -51,7 +51,7 @@ export async function POST(req) {
     });
 
     const options = {
-      amount: 100, // amount in smallest currency unit (paise)
+      amount: 19900, // amount in smallest currency unit (paise)
       currency: "INR",
       receipt: "receipt_" + crypto.randomUUID(),
     };
