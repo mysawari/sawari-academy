@@ -42,20 +42,19 @@ export default function Footer() {
             <ul className="mt-5 flex flex-col gap-2 font-body text-sm text-ink/65">
               <li>
                 <a
-                  href="mailto:support@mysawari.example.com"
+                  href="mailto:hello@sawariacademy.in"
                   className="hover:text-ink"
                 >
-                  support@mysawari.example.com
+                  hello@sawariacademy.in
                 </a>
               </li>
               <li>
-                <a href="tel:+911234567890" className="hover:text-ink">
-                  +91 12345 67890
+                <a href="tel:+917368889607" className="hover:text-ink">
+                  +91 7368889607
                 </a>
               </li>
               <li className="text-ink/50">
-                MySawari, [Registered Business Address],
-                [City, State, PIN — India]
+                MySawari, Ganesh Turning, Kahilipara, Guwahati, Assam - 781019
               </li>
             </ul>
           </div>
